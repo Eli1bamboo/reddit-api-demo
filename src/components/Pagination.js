@@ -27,7 +27,7 @@ class Pagination extends Component {
     setPage(page) {
         var items = this.props.items;
         var pager = this.state.pager;
-        console.log(items);
+
         if (page < 1 || page > pager.totalPages) {
             return;
         }
@@ -126,9 +126,8 @@ class Pagination extends Component {
                     </Button>
                 </Grid>
                 {pager.pages.map((page, index) =>
-                    <Grid item>
+                    <Grid item key={index}>
                         <Button
-                            key={index}
                             variant="contained"
                             color={pager.currentPage === page ? 'primary' : 'default'}
                             onClick={() => this.setPage(page)}

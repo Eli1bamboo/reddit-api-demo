@@ -1,5 +1,7 @@
 const initState = {
-	isLoading: false
+	isLoading: false,
+	dismissed: [],
+	seen: [],
 }
 
 const PostsReducer = (state = initState, action) => {
@@ -11,7 +13,6 @@ const PostsReducer = (state = initState, action) => {
 				isLoading: false,
 				getError: null
 			}
-
 		case 'GETLIST_LOADING':
 			console.log('loading')
 			return {
@@ -27,6 +28,18 @@ const PostsReducer = (state = initState, action) => {
 				results: action.results,
 				isLoading: false,
 				getError: null
+			}
+		case 'REMOVE_ITEM':
+			console.log('removed')
+			return {
+				...state,
+				dismissed: [...state.dismissed, action.postId]
+			}
+		case 'SEEN_ITEM':
+			console.log('seen')
+			return {
+				...state,
+				seen: [...state.seen, action.postId]
 			}
 		default:
 			return state
