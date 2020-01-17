@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { getList, dismissPost, seenPost } from '../store/actions/Actions'
+import { dismissPost, seenPost, unseenPost } from '../store/actions/Actions'
 import moment from 'moment'
 import {
     Grid,
@@ -25,9 +25,13 @@ class ListItem extends Component {
     }
 
     handleOnSeenPost = (postId) => {
-        const { seenPost } = this.props;
+        const { seenPost, unseenPost, seen } = this.props;
 
-        seenPost(postId);
+        if (!seen.includes(postId)) {
+            seenPost(postId);
+        } else {
+            unseenPost(postId);
+        }
     }
 
     handleOnClickThumb = () => {
@@ -39,7 +43,9 @@ class ListItem extends Component {
     }
 
     render() {
-        const { item } = this.props;
+        const { item, seen } = this.props;
+
+        // console.log('seeeeens', seen);
 
         return (
             <Grid item xs={12}>
@@ -82,7 +88,7 @@ class ListItem extends Component {
                                 <IconButton
                                     onClick={() => this.handleOnSeenPost(item.id)}
                                 >
-                                    <VisibilityOffIcon />
+                                    {seen.includes(item.id) ? <VisibilityOffIcon color={'error'} /> : <VisibilityIcon color={'primary'} />}
                                 </IconButton>
                                 <IconButton
                                     onClick={() => this.handleOnDismissPost(item.id)}
@@ -110,6 +116,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dismissPost: (postId) => dispatch(dismissPost(postId)),
         seenPost: (postId) => dispatch(seenPost(postId)),
+        unseenPost: (postId) => dispatch(unseenPost(postId)),
     }
 }
 

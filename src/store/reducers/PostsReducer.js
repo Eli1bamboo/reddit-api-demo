@@ -41,6 +41,12 @@ const PostsReducer = (state = initState, action) => {
 				...state,
 				seen: [...state.seen, action.postId]
 			}
+		case 'UNSEEN_ITEM':
+			console.log('unseen')
+			return {
+				...state,
+				seen: state.seen.filter(item => item !== action.postId)
+			}
 		default:
 			return state
 	}
