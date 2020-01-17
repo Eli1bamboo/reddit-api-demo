@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { getList } from '../store/actions/Actions'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, Typography } from '@material-ui/core'
 
 class Pagination extends Component {
     constructor(props) {
@@ -104,7 +101,10 @@ class Pagination extends Component {
         }
 
         return (
-            <Grid container spacing={1}>
+            <Grid container spacing={1} justify={'center'}>
+                <Grid container justify={'center'}>
+                    <Typography>Total: {pager.totalItems}</Typography>
+                </Grid>
                 <Grid item>
                     <Button
                         variant="contained"
@@ -161,18 +161,4 @@ class Pagination extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const { PostsReducer: { results = [] } } = state
-
-    return {
-        results
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getList: () => dispatch(getList())
-    }
-}
-
-export default compose(connect(mapStateToProps, mapDispatchToProps))(Pagination)
+export default (Pagination)

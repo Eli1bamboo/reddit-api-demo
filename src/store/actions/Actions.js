@@ -31,18 +31,9 @@ export const seenPost = (postId) => {
 	}
 }
 
-
-export const setPosts = (posts) => {
+export const unseenPost = (postId) => {
 	return (dispatch) => {
 
-		dispatch({ type: 'SET_POSTS', posts })
-	}
-}
-
-
-export const setListPage = (list) => {
-	return (dispatch) => {
-
-		dispatch({ type: 'SET_LIST', list })
+		dispatch({ type: 'UNSEEN_ITEM', postId })
 	}
 }

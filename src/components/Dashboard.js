@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { getList, setPosts } from '../store/actions/Actions'
+import { getList } from '../store/actions/Actions'
 import { Container, Typography, Grid } from '@material-ui/core'
 import PostsList from './PostsList'
 import Pagination from './Pagination'
 
 class Dashboard extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			pageOfItems: [],
 			filteredResults: []
-		};
+		}
 	}
 
 	onChangePage = (pageOfItems) => {
@@ -27,15 +27,8 @@ class Dashboard extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { setPosts } = this.props
 		const { results, dismissed } = nextProps
-		const filteredResults = []
-
-		const posts = results.map(result => {
-			if (dismissed.indexOf(result.id)) {
-				filteredResults.push(result)
-			}
-		})
+		const filteredResults = results.filter(result => !dismissed.includes(result.id));
 
 		return this.setState({
 			filteredResults
@@ -80,7 +73,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getList: () => dispatch(getList()),
-		setPosts: (postId) => dispatch(setPosts(postId)),
 	}
 }
 
