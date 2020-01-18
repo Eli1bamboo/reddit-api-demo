@@ -16,6 +16,7 @@ import {
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
+import Thumbnail from './Thumbnail'
 
 class ListItem extends Component {
     handleOnDismissPost = (postId) => {
@@ -66,8 +67,7 @@ class ListItem extends Component {
                             {
                                 this.isImage(item.url) && (
                                     <Grid item xs>
-                                        <img src={item.url} alt={item.title} style={{ width: '100%' }} />
-
+                                        <Thumbnail imgUrl={item.url} title={item.title} />
                                     </Grid>
                                 )
                             }
