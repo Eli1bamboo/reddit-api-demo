@@ -13,3 +13,5 @@ You will note there is no consistency in components types. This is to demostate 
 The pagination logic and the persistant state feature are adaptations of code I found at stack overflow. Not much to say about this, I think the web sometimes has the needed.
 
 Regarding to the core of the app, its a React app that uses Redux and implement Redux-Thunk.
+
+To run the app, clone this repo -> npm install -> npm start 
