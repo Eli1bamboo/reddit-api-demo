@@ -35,8 +35,12 @@ class ListItem extends Component {
         }
     }
 
-    handleOnClickThumb = () => {
-        // modal
+    handleOnClickTitle = (post) => {
+        const { onSelectItem, seenPost } = this.props;
+
+        seenPost(post.id);
+
+        return onSelectItem(post)
     }
 
     isImage = (url) => {
@@ -73,7 +77,7 @@ class ListItem extends Component {
                             }
                             <Grid item xs>
                                 <CardContent>
-                                    <Typography variant="h6">
+                                    <Typography variant="h6" onClick={() => this.handleOnClickTitle(item)}>
                                         {item.title}
                                     </Typography>
                                     <Typography variant="body2">

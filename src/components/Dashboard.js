@@ -5,6 +5,7 @@ import { getList } from '../store/actions/Actions'
 import { Container, Typography, Grid } from '@material-ui/core'
 import PostsList from './PostsList'
 import Pagination from './Pagination'
+import PostDetails from './PostDetails'
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -12,8 +13,13 @@ class Dashboard extends Component {
 
 		this.state = {
 			pageOfItems: [],
-			filteredResults: []
+			filteredResults: [],
+			selectedItem: {},
 		}
+	}
+
+	onSelectItem = (post) => {
+		this.setState({ selectedItem: post });
 	}
 
 	onChangePage = (pageOfItems) => {
@@ -36,7 +42,7 @@ class Dashboard extends Component {
 	}
 
 	render() {
-		const { filteredResults, pageOfItems } = this.state
+		const { filteredResults, pageOfItems, selectedItem } = this.state
 
 		return (
 			<Container maxWidth={'lg'}>
@@ -47,10 +53,10 @@ class Dashboard extends Component {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<PostsList posts={pageOfItems} />
+						<PostsList posts={pageOfItems} onSelectItem={this.onSelectItem} />
 					</Grid>
 					<Grid item xs={12} md={6}>
-						Post Detail
+						<PostDetails details={selectedItem} />
 					</Grid>
 					<Grid item xs={12} md={12}>
 						<Pagination items={filteredResults} onChangePage={this.onChangePage} />
